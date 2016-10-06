@@ -8,17 +8,63 @@
 
 import UIKit
 
+extension Notification.Name {
+    static let mocReady = Notification.Name("mocReady")
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let coreDataFile = "FamilyRecipesModel"
+    var dataDoc : UIManagedDocument?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        openCoreDataDocument()
         return true
     }
-
+    
+    func openCoreDataDocument() {
+        let url = coreDataUrl()
+        
+        if dataDoc == nil {
+            dataDoc = UIManagedDocument(fileURL: url)
+        }
+        
+        if FileManager.default.fileExists(atPath: url.path) {
+            dataDoc!.open {
+                if $0 {
+                    self.dataDocReady()
+                } else {
+                    print("couldn't open the document at \(url)")
+                }
+            }
+        } else {
+            dataDoc!.save(to: url, for: .forCreating) {
+                if $0 {
+                    self.dataDocReady()
+                } else {
+                    print("coudln't create the document at \(url)")
+                }
+            }
+        }
+    }
+    
+    func coreDataUrl() -> URL {
+        let docDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return docDirectory.appendingPathComponent(coreDataFile);
+    }
+    
+    func dataDocReady() {
+        if dataDoc != nil && dataDoc!.documentState == .normal {
+            let notification = Notification(name: .mocReady, object: self, userInfo: ["context" : dataDoc!.managedObjectContext])
+            NotificationCenter.default.post(notification)
+        } else {
+            print ("document at \(dataDoc!.fileURL) is not ready")
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

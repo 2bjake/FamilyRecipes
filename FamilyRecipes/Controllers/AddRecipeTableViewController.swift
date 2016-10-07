@@ -21,11 +21,18 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     var embeddedDetailController: UITabBarController?
     var moc: NSManagedObjectContext?
     var delegate : AddRecipeTableViewControllerDelegate?
+
+    var sourceIndex = 1 {
+        didSet {
+            embeddedDetailController?.selectedIndex = sourceIndex
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sourcePicker.delegate = self
         sourcePicker.dataSource = self
+        sourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -42,25 +49,22 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("source \(sourcePickerValues[row]) was selected") //TODO: remove me
-        embeddedDetailController?.selectedIndex = row
+        sourceIndex = row
     }
-
+    
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         delegate?.addRecipeTableViewControllerDidCancel(self)
     }
 
     @IBAction func done(_ sender: UIBarButtonItem) {
-        /*
-        if let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: context) as? Recipe {
-            
-        }
- */
+        //TODO: create recipe
         delegate?.addRecipeTableViewControllerDidSave(self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addRecipeDetailEmbed" {
             embeddedDetailController = segue.destination as? UITabBarController
+            embeddedDetailController?.selectedIndex = sourceIndex
         }
     }
 }

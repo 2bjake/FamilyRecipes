@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="oGk-S6-xiP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useTraitCollections="YES" colorMatched="YES" initialViewController="oGk-S6-xiP">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -85,10 +85,6 @@
         <scene sceneID="QMZ-Xc-NHX">
             <objects>
                 <viewController id="2u7-hY-EzC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="R6w-ee-ovZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="cDa-aY-3o1"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vzZ-lA-UaZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -139,7 +135,7 @@
                                         <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rKD-L4-aEL" id="PjT-ei-n67">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GcZ-j5-kzz">
@@ -156,15 +152,15 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Source" id="LLO-QV-PZ5">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="91" id="dHa-JF-fcy">
-                                        <rect key="frame" x="0.0" y="221" width="375" height="91"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" rowHeight="116" id="dHa-JF-fcy">
+                                        <rect key="frame" x="0.0" y="220" width="375" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dHa-JF-fcy" id="Jqx-Hq-pWv">
-                                            <frame key="frameInset" width="375" height="90"/>
+                                            <frame key="frameInset" width="375" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elF-Uj-Jft">
-                                                    <frame key="frameInset" minX="27" minY="8" width="320" height="80"/>
+                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elF-Uj-Jft">
+                                                    <frame key="frameInset" minX="27" minY="-9" width="320" height="133"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </pickerView>
                                             </subviews>
@@ -175,10 +171,10 @@
                             <tableViewSection headerTitle="Details" id="Wlq-Vx-OdV">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="800" id="n7x-s2-YbY">
-                                        <rect key="frame" x="0.0" y="369" width="375" height="800"/>
+                                        <rect key="frame" x="0.0" y="392" width="375" height="800"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="n7x-s2-YbY" id="opr-27-xAm">
-                                            <frame key="frameInset" width="375" height="799"/>
+                                            <frame key="frameInset" width="375" height="800"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nB-ve-hVp">
@@ -221,18 +217,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WtR-Dw-q14" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2295" y="134"/>
+            <point key="canvasLocation" x="2293.5999999999999" y="133.5832083958021"/>
         </scene>
         <!--Website-->
         <scene sceneID="49a-nu-w1L">
             <objects>
                 <viewController id="bFl-18-Zw2" customClass="AddRecipeDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hii-7P-mwM"/>
-                        <viewControllerLayoutGuide type="bottom" id="65N-KC-1EW"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hX1-iG-Szi">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="767"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Website name? URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvN-Ce-WL1">
@@ -249,18 +241,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y2n-97-u4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3342" y="1395"/>
+            <point key="canvasLocation" x="4205" y="1546"/>
         </scene>
         <!--Cookbook-->
         <scene sceneID="Rpl-rr-Y3W">
             <objects>
                 <viewController id="mb3-Mm-HIa" customClass="AddRecipeDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zD1-iN-C8P"/>
-                        <viewControllerLayoutGuide type="bottom" id="SEn-rm-yFE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AgE-Ob-i9i">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="767"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cookbook name, page, anything else?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRv-UD-ITf">
@@ -277,7 +265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cx6-u2-fGa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3342" y="643"/>
+            <point key="canvasLocation" x="3933" y="-221"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="H8T-fk-V4c">
@@ -297,18 +285,14 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="piW-Ap-BQO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2290" y="912"/>
+            <point key="canvasLocation" x="2366" y="1545"/>
         </scene>
         <!--Photo-->
         <scene sceneID="vh3-FN-7S1">
             <objects>
                 <viewController id="50o-ZH-JN5" customClass="AddRecipeDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="PAv-nA-e6a"/>
-                        <viewControllerLayoutGuide type="bottom" id="UIi-9M-DUa"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Hft-PI-2CJ">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="767"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select or take a picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPB-Vc-eWN">
@@ -325,18 +309,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HtO-7k-N1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4065" y="643"/>
+            <point key="canvasLocation" x="5710" y="-221"/>
         </scene>
         <!--Text-->
         <scene sceneID="jx8-6q-ku4">
             <objects>
                 <viewController id="ywH-0p-NHN" customClass="AddRecipeDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="AZ6-dA-dnx"/>
-                        <viewControllerLayoutGuide type="bottom" id="bFc-po-wIf"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="d0G-Zm-6hp">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="767"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Text area (formatting?) for entering recipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVd-F2-sfc">
@@ -353,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1xH-am-SPA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4065" y="1395"/>
+            <point key="canvasLocation" x="6061" y="1547"/>
         </scene>
     </scenes>
 </document>

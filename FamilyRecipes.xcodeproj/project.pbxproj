@@ -66,11 +66,11 @@
 		73E3E0AE1DA5B6F000A66A59 /* FamilyRecipes */ = {
 			isa = PBXGroup;
 			children = (
-				7374C2D81DA6F9CF004DEDC2 /* Main.storyboard */,
 				73E3E0CE1DA5C08B00A66A59 /* Model */,
 				73E3E0C41DA5B7B500A66A59 /* Controllers */,
 				73E3E0AF1DA5B6F000A66A59 /* AppDelegate.swift */,
 				73E3E0B61DA5B6F000A66A59 /* Assets.xcassets */,
+				7374C2D81DA6F9CF004DEDC2 /* Main.storyboard */,
 				73E3E0B81DA5B6F000A66A59 /* LaunchScreen.storyboard */,
 				73E3E0BB1DA5B6F000A66A59 /* Info.plist */,
 			);

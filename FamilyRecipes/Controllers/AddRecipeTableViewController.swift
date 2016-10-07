@@ -16,6 +16,7 @@ protocol AddRecipeTableViewControllerDelegate {
 
 class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var sourcePicker: UIPickerView!
+    @IBOutlet weak var nameTextField: UITextField!
 
     let sourcePickerValues = ["Cookbook", "Website", "Photo", "Text"]
     var embeddedDetailController: UITabBarController?
@@ -57,8 +58,20 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     }
 
     @IBAction func done(_ sender: UIBarButtonItem) {
-        //TODO: create recipe
-        delegate?.addRecipeTableViewControllerDidSave(self)
+        if isFormValid() {
+            createRecipe()
+            delegate?.addRecipeTableViewControllerDidSave(self)
+        }
+    }
+    
+    private func isFormValid() -> Bool{
+        //TODO: validate that all data has been entered to create a recipe, if not, update UI
+        return nameTextField.text != nil && nameTextField.text!.characters.count > 0;
+    }
+    
+    private func createRecipe() {
+        let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: moc!) as! Recipe
+        recipe.name = nameTextField.text
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

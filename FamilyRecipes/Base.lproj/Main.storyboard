@@ -218,6 +218,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="nameTextField" destination="1cT-UB-U6V" id="xJf-6Q-XAe"/>
                         <outlet property="sourcePicker" destination="Fk6-NZ-0ZF" id="7HL-Ii-f6j"/>
                     </connections>
                 </tableViewController>

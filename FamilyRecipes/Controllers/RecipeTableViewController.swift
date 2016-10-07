@@ -35,8 +35,8 @@ class RecipeTableViewController : CoreDataTableViewController, AddRecipeTableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
         let recipe = fetchedResultsController?.object(at: indexPath) as! Recipe
         
-        cell.textLabel!.text = recipe.name
-        cell.detailTextLabel!.text = "world"
+        cell.textLabel?.text = recipe.name
+        cell.detailTextLabel?.text = ""
         return cell
     }
 

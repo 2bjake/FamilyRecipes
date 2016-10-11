@@ -9,7 +9,17 @@
 import Foundation
 import CoreData
 
-
 public class Recipe: NSManagedObject {
+    
+    enum Source : String { case cookbook, website, photo, text}
+    
+    var source : Source {
+        get {
+            return Source(rawValue: sourceString!)!
+        }
+        set {
+            sourceString = newValue.rawValue
+        }
+    }
 
 }

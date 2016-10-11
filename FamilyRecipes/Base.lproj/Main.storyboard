@@ -138,10 +138,10 @@
                             <tableViewSection headerTitle="Recipe Name" id="rSd-Uz-8NX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sA3-rT-RpU">
-                                        <rect key="frame" x="0.0" y="120" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="119.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sA3-rT-RpU" id="r5K-1a-IkU">
-                                            <frame key="frameInset" width="375" height="44"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1cT-UB-U6V">
@@ -159,10 +159,10 @@
                             <tableViewSection headerTitle="Source" id="4tu-1o-qmU">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="yBH-sJ-uob">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="116"/>
+                                        <rect key="frame" x="0.0" y="219.5" width="375" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yBH-sJ-uob" id="izh-yB-NGb">
-                                            <frame key="frameInset" width="375" height="116"/>
+                                            <frame key="frameInset" width="375" height="115.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fk6-NZ-0ZF">
@@ -176,11 +176,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Details" id="uiV-ul-pcA">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="800" id="pV6-Jv-RbP">
-                                        <rect key="frame" x="0.0" y="392" width="375" height="800"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="493" id="pV6-Jv-RbP">
+                                        <rect key="frame" x="0.0" y="391.5" width="375" height="493"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pV6-Jv-RbP" id="Ldd-hB-j0w">
-                                            <frame key="frameInset" width="375" height="800"/>
+                                            <frame key="frameInset" width="375" height="492"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X71-jC-LmR">
@@ -193,7 +193,7 @@
                                                 <constraint firstItem="X71-jC-LmR" firstAttribute="leading" secondItem="Ldd-hB-j0w" secondAttribute="leadingMargin" constant="8" id="IPr-Gk-93n"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="X71-jC-LmR" secondAttribute="trailing" constant="8" id="Mrc-fi-8Ad"/>
                                                 <constraint firstItem="X71-jC-LmR" firstAttribute="top" secondItem="Ldd-hB-j0w" secondAttribute="topMargin" constant="8" id="Zxh-PL-EBU"/>
-                                                <constraint firstAttribute="bottom" secondItem="X71-jC-LmR" secondAttribute="bottom" constant="391.5" id="ySo-ud-eC2"/>
+                                                <constraint firstAttribute="bottom" secondItem="X71-jC-LmR" secondAttribute="bottom" constant="20" symbolic="YES" id="ySo-ud-eC2"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -229,30 +229,61 @@
         <!--Website-->
         <scene sceneID="fWj-KA-p4A">
             <objects>
-                <viewController id="jSB-Za-3bW" customClass="AddRecipeDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jSB-Za-3bW" customClass="AddRecipeWebDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3ya-KX-nnB"/>
                         <viewControllerLayoutGuide type="bottom" id="GK1-8J-mU2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="A9m-V1-0ab">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Website name? URL (web preview?)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWj-Db-eDF">
-                                <frame key="frameInset" minX="16" minY="8" width="274" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWj-Db-eDF">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6ua-Bj-LtR">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wnz-yY-nPO">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4k-Dv-pT1">
+                                        <state key="normal" title="Preview"/>
+                                        <connections>
+                                            <action selector="previewClicked:" destination="jSB-Za-3bW" eventType="touchUpInside" id="mog-HK-wV8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gq-HX-scs">
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AWj-Db-eDF" firstAttribute="leading" secondItem="A9m-V1-0ab" secondAttribute="leadingMargin" constant="8" id="JPe-ze-dND"/>
+                            <constraint firstItem="6gq-HX-scs" firstAttribute="top" secondItem="6ua-Bj-LtR" secondAttribute="bottom" id="K4Z-QU-R7t"/>
+                            <constraint firstItem="AWj-Db-eDF" firstAttribute="top" secondItem="3ya-KX-nnB" secondAttribute="bottom" constant="8" symbolic="YES" id="XFn-PW-Dkf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6gq-HX-scs" secondAttribute="trailing" constant="8" id="aQk-eO-V8l"/>
+                            <constraint firstItem="GK1-8J-mU2" firstAttribute="top" secondItem="6gq-HX-scs" secondAttribute="bottom" constant="8" symbolic="YES" id="akY-PJ-ZoX"/>
+                            <constraint firstItem="6ua-Bj-LtR" firstAttribute="top" secondItem="AWj-Db-eDF" secondAttribute="bottom" constant="8" symbolic="YES" id="fCe-vj-sGD"/>
+                            <constraint firstItem="6ua-Bj-LtR" firstAttribute="leading" secondItem="A9m-V1-0ab" secondAttribute="leadingMargin" constant="8" id="mA8-Be-j5G"/>
+                            <constraint firstItem="6gq-HX-scs" firstAttribute="leading" secondItem="A9m-V1-0ab" secondAttribute="leadingMargin" constant="8" id="nZb-a1-Wkb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6ua-Bj-LtR" secondAttribute="trailing" constant="8" id="xQU-B6-4ba"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Website" id="YTz-zC-VhO"/>
+                    <connections>
+                        <outlet property="urlTextField" destination="Wnz-yY-nPO" id="mzZ-yT-HVz"/>
+                        <outlet property="webView" destination="6gq-HX-scs" id="POg-am-dqx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uNq-gF-G3P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4521" y="132"/>
+            <point key="canvasLocation" x="4520.8000000000002" y="131.33433283358323"/>
         </scene>
         <!--Cookbook-->
         <scene sceneID="bww-lb-85b">
@@ -263,7 +294,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gPM-pd-fi0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6ng-Ik-8pl">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cookbook name (create?), page number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQu-mo-I20">
@@ -311,7 +342,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lRV-3Y-FfZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SfB-dU-hUW">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick or take a picture, picture scrollview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCo-zy-wTy">
@@ -339,7 +370,7 @@
                         <viewControllerLayoutGuide type="bottom" id="5Yg-01-pG7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="B8q-Dw-WMb">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="392"/>
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Formatted text area" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bk-K1-xyw">

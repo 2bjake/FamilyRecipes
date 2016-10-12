@@ -138,10 +138,10 @@
                             <tableViewSection headerTitle="Recipe Name" id="rSd-Uz-8NX">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sA3-rT-RpU">
-                                        <rect key="frame" x="0.0" y="119.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sA3-rT-RpU" id="r5K-1a-IkU">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1cT-UB-U6V">
@@ -150,6 +150,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="GdU-o2-ZeR" id="jwp-oQ-cEz"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -159,10 +162,10 @@
                             <tableViewSection headerTitle="Source" id="4tu-1o-qmU">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="116" id="yBH-sJ-uob">
-                                        <rect key="frame" x="0.0" y="219.5" width="375" height="116"/>
+                                        <rect key="frame" x="0.0" y="220" width="375" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yBH-sJ-uob" id="izh-yB-NGb">
-                                            <frame key="frameInset" width="375" height="115.5"/>
+                                            <frame key="frameInset" width="375" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fk6-NZ-0ZF">
@@ -177,7 +180,7 @@
                             <tableViewSection headerTitle="Details" id="uiV-ul-pcA">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="493" id="pV6-Jv-RbP">
-                                        <rect key="frame" x="0.0" y="391.5" width="375" height="493"/>
+                                        <rect key="frame" x="0.0" y="392" width="375" height="493"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pV6-Jv-RbP" id="Ldd-hB-j0w">
                                             <frame key="frameInset" width="375" height="492"/>
@@ -209,11 +212,13 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="DcT-bs-IwS">
                             <connections>
                                 <action selector="cancel:" destination="GdU-o2-ZeR" id="Dvy-Nb-z6u"/>
+                                <segue destination="EQW-lZ-pFK" kind="unwind" identifier="addRecipeCancel" unwindAction="addRecipeUnwind:" id="kuJ-sG-CsK"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="22Y-iG-rtG">
                             <connections>
                                 <action selector="done:" destination="GdU-o2-ZeR" id="pK4-gR-IZG"/>
+                                <segue destination="EQW-lZ-pFK" kind="unwind" identifier="addRecipeDone" unwindAction="addRecipeUnwind:" id="NfK-zq-wQO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -223,6 +228,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sC-Qf-C0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EQW-lZ-pFK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2293.5999999999999" y="133.5832083958021"/>
         </scene>
@@ -249,6 +255,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="jSB-Za-3bW" id="wVJ-PC-w2z"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4k-Dv-pT1">
                                         <state key="normal" title="Preview"/>

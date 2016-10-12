@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class RecipeTableViewController : CoreDataTableViewController, AddRecipeTableViewControllerDelegate {
+class RecipeTableViewController : CoreDataTableViewController {
     
     var moc : NSManagedObjectContext? {
         didSet {
@@ -36,30 +36,23 @@ class RecipeTableViewController : CoreDataTableViewController, AddRecipeTableVie
         let recipe = fetchedResultsController?.object(at: indexPath) as! Recipe
         
         cell.textLabel?.text = recipe.name
-        cell.detailTextLabel?.text = ""
+        cell.detailTextLabel?.text = recipe.url
         return cell
     }
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAddRecipe" && segue.destination is UINavigationController {
             let nav = segue.destination as! UINavigationController
             if let dest = nav.childViewControllers.first as? AddRecipeTableViewController {
-                dest.delegate = self
                 dest.moc = moc
             }
         }
     }
     
-    // MARK: - AddRecipeTableViewControllerDelegate
-    func addRecipeTableViewControllerDidSave(_ controller: AddRecipeTableViewController) {
-        tableView.reloadData()
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func addRecipeTableViewControllerDidCancel(_ controller: AddRecipeTableViewController) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func addRecipeUnwind(_ sender: UIStoryboardSegue) {
+        if sender.identifier == AddRecipeTableViewController.doneUnwindIdentifier {
+            tableView.reloadData()
+        }
     }
 }

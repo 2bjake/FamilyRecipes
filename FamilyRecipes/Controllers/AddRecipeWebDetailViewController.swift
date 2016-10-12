@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeWebDetailViewController: AddRecipeDetailViewController {
+class AddRecipeWebDetailViewController: AddRecipeDetailViewController, UITextFieldDelegate {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var webView: UIWebView!
 
@@ -25,18 +25,22 @@ class AddRecipeWebDetailViewController: AddRecipeDetailViewController {
         }
     }
     
-    override func isFormValid() -> Bool {
-         var isValid = false
-        if let urlString = urlTextField.text {
-            isValid = URL(string:urlString) != nil
+    override func validateForm() -> Bool {
+        if let urlString = urlTextField.text, URL(string:urlString) != nil {
+            return true
+        } else {
+            presentAlertText("Web address must be valid")
+            return false
         }
-        return isValid
     }
     
     override func updateRecipe(_ recipe: Recipe) {
-        if isFormValid() {
-            recipe.source = .website
-            recipe.url = urlTextField.text
-        }
+        recipe.source = .website
+        recipe.url = urlTextField.text
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

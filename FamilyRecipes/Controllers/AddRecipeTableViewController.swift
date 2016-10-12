@@ -9,19 +9,17 @@
 import UIKit
 import CoreData
 
-protocol AddRecipeTableViewControllerDelegate {
-    func addRecipeTableViewControllerDidCancel(_ controller:AddRecipeTableViewController) -> Void;
-    func addRecipeTableViewControllerDidSave(_ controller:AddRecipeTableViewController) -> Void;
-}
-
-class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var sourcePicker: UIPickerView!
     @IBOutlet weak var nameTextField: UITextField!
 
+    static let doneUnwindIdentifier = "addRecipeDone"
+    static let cancelUnwindIdentifier = "addRecipeCancel"
+    
+    
     let sourcePickerValues = ["Cookbook", "Website", "Photo", "Text"]
     var embeddedDetailController: UITabBarController?
     var moc: NSManagedObjectContext?
-    var delegate : AddRecipeTableViewControllerDelegate?
 
     var sourceIndex = 1 {
         didSet {
@@ -36,8 +34,58 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
         sourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
     }
     
+    private func validateForm() -> Bool{
+        if nameTextField.text == nil || nameTextField.text!.characters.count == 0 {
+            let alert = UIAlertController(title: "Add Recipe", message: "Recipe name is required", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            return false
+        } else if let detailVC = detailViewController() {
+            return detailVC.validateForm()
+        } else {
+            return false
+        }
+    }
+    
+    private func createRecipe() {
+        let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: moc!) as! Recipe
+        recipe.name = nameTextField.text
+        detailViewController()!.updateRecipe(recipe)
+    }
+    
+    func detailViewController() -> AddRecipeDetailViewController? {
+        return embeddedDetailController?.selectedViewController as? AddRecipeDetailViewController
+    }
+    
+    // MARK: Navigation
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == AddRecipeTableViewController.doneUnwindIdentifier {
+            return validateForm()
+        } else {
+            return super.shouldPerformSegue(withIdentifier: identifier, sender: sender)
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addRecipeDetailEmbed" {
+            embeddedDetailController = segue.destination as? UITabBarController
+            embeddedDetailController?.selectedIndex = sourceIndex
+        } else if segue.identifier == AddRecipeTableViewController.doneUnwindIdentifier {
+            if validateForm() {
+                createRecipe()
+            }
+        }
+    }
+    
+    // MARK: UIPickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -52,32 +100,6 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
         print("source \(sourcePickerValues[row]) was selected") //TODO: remove me
         sourceIndex = row
     }
-    
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
-        delegate?.addRecipeTableViewControllerDidCancel(self)
-    }
 
-    @IBAction func done(_ sender: UIBarButtonItem) {
-        if isFormValid() {
-            createRecipe()
-            delegate?.addRecipeTableViewControllerDidSave(self)
-        }
-    }
     
-    private func isFormValid() -> Bool{
-        //TODO: validate that all data has been entered to create a recipe, if not, update UI
-        return nameTextField.text != nil && nameTextField.text!.characters.count > 0;
-    }
-    
-    private func createRecipe() {
-        let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: moc!) as! Recipe
-        recipe.name = nameTextField.text
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addRecipeDetailEmbed" {
-            embeddedDetailController = segue.destination as? UITabBarController
-            embeddedDetailController?.selectedIndex = sourceIndex
-        }
-    }
 }

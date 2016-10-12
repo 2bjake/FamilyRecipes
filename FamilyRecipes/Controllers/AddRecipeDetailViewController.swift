@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeDetailViewController: UIViewController {
+class AddRecipeDetailViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,5 +28,10 @@ class AddRecipeDetailViewController: UIViewController {
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

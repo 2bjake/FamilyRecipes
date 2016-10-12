@@ -36,7 +36,11 @@ class RecipeTableViewController : CoreDataTableViewController {
         let recipe = fetchedResultsController?.object(at: indexPath) as! Recipe
         
         cell.textLabel?.text = recipe.name
-        cell.detailTextLabel?.text = recipe.url
+        if recipe.source == .cookbook {
+            cell.detailTextLabel?.text = "\(recipe.inBook?.name ?? "") - page \(recipe.pageNumber ?? "")"
+        } else if recipe.source == .website {
+            cell.detailTextLabel?.text = recipe.url
+        }
         return cell
     }
 

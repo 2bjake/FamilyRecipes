@@ -171,6 +171,10 @@
                                                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fk6-NZ-0ZF">
                                                     <frame key="frameInset" minX="27" minY="-9" width="320" height="133"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="GdU-o2-ZeR" id="ucA-Wy-2Jk"/>
+                                                        <outlet property="delegate" destination="GdU-o2-ZeR" id="daR-PW-Hv5"/>
+                                                    </connections>
                                                 </pickerView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -297,7 +301,7 @@
         <!--Cookbook-->
         <scene sceneID="bww-lb-85b">
             <objects>
-                <viewController id="Bue-wy-hOQ" customClass="AddRecipeDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Bue-wy-hOQ" customClass="AddRecipeCookbookDetailViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GIU-3k-rtY"/>
                         <viewControllerLayoutGuide type="bottom" id="gPM-pd-fi0"/>
@@ -306,21 +310,125 @@
                         <rect key="frame" x="0.0" y="0.0" width="343" height="456"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cookbook name (create?), page number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQu-mo-I20">
-                                <frame key="frameInset" minX="16" minY="8" width="308" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="E9m-A3-NRI">
+                                <frame key="frameInset" minX="20" minY="8" width="303" height="287"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cookbook name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aqz-QG-86y">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zLf-8S-bJx">
+                                        <connections>
+                                            <outlet property="dataSource" destination="Bue-wy-hOQ" id="uH7-eb-0xH"/>
+                                            <outlet property="delegate" destination="Bue-wy-hOQ" id="cgE-Bt-qNZ"/>
+                                        </connections>
+                                    </pickerView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZL-Yj-qYf">
+                                        <state key="normal" title="Add new cookbook"/>
+                                        <connections>
+                                            <segue destination="mmP-Ap-czu" kind="presentation" identifier="addCookbook" id="h14-vI-fzr"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nXf-Nz-zXi">
+                                <frame key="frameInset" minX="24" minY="303" width="295" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DwY-CO-xZM">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zhk-7I-LYw">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E9m-A3-NRI" firstAttribute="leading" secondItem="6ng-Ik-8pl" secondAttribute="leading" constant="20" symbolic="YES" id="C7K-n9-O6B"/>
+                            <constraint firstItem="E9m-A3-NRI" firstAttribute="top" secondItem="GIU-3k-rtY" secondAttribute="bottom" constant="8" symbolic="YES" id="Qeq-Pf-fl4"/>
+                            <constraint firstItem="nXf-Nz-zXi" firstAttribute="leading" secondItem="6ng-Ik-8pl" secondAttribute="leadingMargin" constant="8" id="RrQ-pf-jJU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nXf-Nz-zXi" secondAttribute="trailing" constant="8" id="XeN-9c-9hl"/>
+                            <constraint firstAttribute="trailing" secondItem="E9m-A3-NRI" secondAttribute="trailing" constant="20" symbolic="YES" id="bKx-7n-d0V"/>
+                            <constraint firstItem="nXf-Nz-zXi" firstAttribute="top" secondItem="E9m-A3-NRI" secondAttribute="bottom" constant="8" symbolic="YES" id="m7u-QL-Nwm"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Cookbook" id="MGA-pX-7Hr"/>
+                    <connections>
+                        <outlet property="cookbookPicker" destination="zLf-8S-bJx" id="iWl-CN-LfA"/>
+                        <outlet property="pageNumberField" destination="zhk-7I-LYw" id="aqG-D8-YHq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4D-NQ-wlC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3886" y="132"/>
+            <point key="canvasLocation" x="3885.5999999999999" y="131.33433283358323"/>
+        </scene>
+        <!--Add Cookbook View Controller-->
+        <scene sceneID="wn1-Jb-gJb">
+            <objects>
+                <viewController id="mmP-Ap-czu" customClass="AddCookbookViewController" customModule="FamilyRecipes" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ujF-KT-7Eq"/>
+                        <viewControllerLayoutGuide type="bottom" id="7q0-YZ-j6h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mb9-zy-yIX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="03v-nZ-JbT">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cookbook name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUn-G0-VC5">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m60-PA-eKb">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Loy-gP-c6M">
+                                <items>
+                                    <navigationItem title="Add Cookbook" id="f2F-h7-gtO">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="acK-D4-uzE">
+                                            <connections>
+                                                <segue destination="jpv-uP-SVg" kind="unwind" identifier="addCookbookCancel" unwindAction="addCookbookUnwind:" id="qv2-AW-hMf"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="0T9-y4-6jm">
+                                            <connections>
+                                                <segue destination="jpv-uP-SVg" kind="unwind" identifier="addCookbookDone" unwindAction="addCookbookUnwind:" id="bY8-kc-NAa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="03v-nZ-JbT" firstAttribute="top" secondItem="Loy-gP-c6M" secondAttribute="bottom" constant="8" id="7cd-2X-48m"/>
+                            <constraint firstItem="03v-nZ-JbT" firstAttribute="leading" secondItem="Mb9-zy-yIX" secondAttribute="leadingMargin" constant="8" id="Mb1-iM-APe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="03v-nZ-JbT" secondAttribute="trailing" constant="8" id="Ng2-pI-m2L"/>
+                            <constraint firstItem="Loy-gP-c6M" firstAttribute="top" secondItem="Mb9-zy-yIX" secondAttribute="top" symbolic="YES" id="PGX-Dh-Ojr"/>
+                            <constraint firstAttribute="trailing" secondItem="Loy-gP-c6M" secondAttribute="trailing" id="hBu-l8-NPh"/>
+                            <constraint firstItem="Loy-gP-c6M" firstAttribute="leading" secondItem="Mb9-zy-yIX" secondAttribute="leading" id="mdO-zt-9xY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameField" destination="m60-PA-eKb" id="QWe-fP-cLy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xlc-7S-uEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jpv-uP-SVg" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3886" y="978"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="8X9-Jl-OFm">

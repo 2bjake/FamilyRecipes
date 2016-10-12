@@ -8,14 +8,10 @@
 
 import UIKit
 
-class AddRecipeWebDetailViewController: AddRecipeDetailViewController, UITextFieldDelegate {
+class AddRecipeWebDetailViewController: AddRecipeDetailViewController {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var webView: UIWebView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     @IBAction func previewClicked(_ sender: UIButton) {
         if let urlString = urlTextField.text {
             if let url = URL(string: urlString) {
@@ -37,10 +33,5 @@ class AddRecipeWebDetailViewController: AddRecipeDetailViewController, UITextFie
     override func updateRecipe(_ recipe: Recipe) {
         recipe.source = .website
         recipe.url = urlTextField.text
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
 }

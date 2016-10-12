@@ -23,14 +23,12 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
 
     var sourceIndex = 1 {
         didSet {
-            embeddedDetailController?.selectedIndex = sourceIndex
+            setDetailViewControllerIndex()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sourcePicker.delegate = self
-        sourcePicker.dataSource = self
         sourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
     }
     
@@ -58,6 +56,13 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
         return embeddedDetailController?.selectedViewController as? AddRecipeDetailViewController
     }
     
+    func setDetailViewControllerIndex() {
+        embeddedDetailController?.selectedIndex = sourceIndex
+        if let cookbookDetailViewController = detailViewController() as? AddRecipeCookbookDetailViewController {
+            cookbookDetailViewController.managedObjectContext = moc
+        }
+    }
+    
     // MARK: Navigation
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == AddRecipeTableViewController.doneUnwindIdentifier {
@@ -70,7 +75,7 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addRecipeDetailEmbed" {
             embeddedDetailController = segue.destination as? UITabBarController
-            embeddedDetailController?.selectedIndex = sourceIndex
+            setDetailViewControllerIndex()
         } else if segue.identifier == AddRecipeTableViewController.doneUnwindIdentifier {
             if validateForm() {
                 createRecipe()
@@ -78,14 +83,23 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
         }
     }
     
-    // MARK: UIPickerView
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+    override func allowedChildViewControllersForUnwinding(from source: UIStoryboardUnwindSegueSource) -> [UIViewController] {
+        if let tabController = embeddedDetailController {
+            return tabController.childViewControllers
+        } else {
+            return []
+        }
     }
     
+    // MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    // MARK: UIPickerView Delegate & DataSource
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

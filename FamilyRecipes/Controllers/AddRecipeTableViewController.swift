@@ -9,9 +9,13 @@
 import UIKit
 import CoreData
 
-class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
-    @IBOutlet weak var sourcePicker: UIPickerView!
-    @IBOutlet weak var nameTextField: UITextField!
+class AddRecipeTableViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+
+    let nameLabel = UILabel()
+    let nameTextField = UITextField()
+    let sourceLabel = UILabel()
+    let sourcePicker = UIPickerView()
+
 
     static let doneUnwindIdentifier = "addRecipeDone"
     static let cancelUnwindIdentifier = "addRecipeCancel"
@@ -19,17 +23,105 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     
     let sourcePickerValues = ["Cookbook", "Website", "Photo", "Text"]
     var embeddedDetailController: UITabBarController?
-    var moc: NSManagedObjectContext?
+    var managedObjectContext: NSManagedObjectContext! // must be set before presented
 
     var sourceIndex = 1 {
         didSet {
             setDetailViewControllerIndex()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        sourcePicker.delegate = self
+        sourcePicker.dataSource = self
         sourcePicker.selectRow(sourceIndex, inComponent: 0, animated: false)
+        setupStackView()
+    }
+/*
+    func setupViews() {
+        view.backgroundColor = UIColor.white
+        let margins = view.layoutMarginsGuide
+
+        let navBar = createNavBar()
+        self.view.addSubview(navBar)
+
+        nameLabel.text = "Recipe Name"
+        view.addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 8).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        nameLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+
+        view.addSubview(nameTextField)
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
+        nameTextField.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        nameTextField.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+
+        sourceLabel.text = "Source"
+        view.addSubview(sourceLabel)
+        sourceLabel.translatesAutoresizingMaskIntoConstraints = false
+        sourceLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 8).isActive = true
+        sourceLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        sourceLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+
+        view.addSubview(sourcePicker)
+        sourcePicker.translatesAutoresizingMaskIntoConstraints = false
+        sourcePicker.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 8).isActive = true
+        sourcePicker.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        sourcePicker.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+    }
+*/
+    func setupStackView() {
+        view.backgroundColor = UIColor.white
+        let margins = view.layoutMarginsGuide
+
+        let navBar = createNavBar()
+        self.view.addSubview(navBar)
+
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+        //stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+
+        nameLabel.text = "Recipe name"
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(nameTextField)
+        sourceLabel.text = "Source"
+        stackView.addArrangedSubview(sourceLabel)
+        stackView.addArrangedSubview(sourcePicker)
+
+        let elementHeight = nameLabel.frame.height + nameTextField.frame.height + sourceLabel.frame.height + sourcePicker.frame.height
+        stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: elementHeight + stackView.spacing * 3)
+    }
+
+    func createNavBar() -> UINavigationBar {
+        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 66))
+        let navItem = UINavigationItem(title: "Add Recipe")
+        navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(AddRecipeTableViewController.doneTouched))
+        navItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: #selector(AddRecipeTableViewController.cancelTouched))
+        navBar.pushItem(navItem, animated: false)
+        return navBar
+    }
+
+    func doneTouched() {
+        if validateForm() {
+            createRecipe()
+            self.dismiss(animated: true, completion: nil)
+            // inform presenter that item was added
+        }
+    }
+
+    func cancelTouched() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func validateForm() -> Bool{
@@ -47,7 +139,7 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     }
     
     private func createRecipe() {
-        let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: moc!) as! Recipe
+        let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: managedObjectContext) as! Recipe
         recipe.name = nameTextField.text
         detailViewController()!.updateRecipe(recipe)
     }
@@ -59,7 +151,7 @@ class AddRecipeTableViewController: UITableViewController, UIPickerViewDelegate,
     func setDetailViewControllerIndex() {
         embeddedDetailController?.selectedIndex = sourceIndex
         if let cookbookDetailViewController = detailViewController() as? AddRecipeCookbookDetailViewController {
-            cookbookDetailViewController.managedObjectContext = moc
+            cookbookDetailViewController.managedObjectContext = managedObjectContext
         }
     }
     

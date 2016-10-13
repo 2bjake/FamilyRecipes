@@ -8,19 +8,18 @@
 
 import UIKit
 
-extension Notification.Name {
-    static let mocReady = Notification.Name("mocReady")
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     
     let coreDataFile = "FamilyRecipesModel"
     var dataDoc : UIManagedDocument?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        window!.rootViewController = UINavigationController(rootViewController: RecipeTableViewController())
+        window!.makeKeyAndVisible()
+
         openCoreDataDocument()
         return true
     }
@@ -58,13 +57,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func dataDocReady() {
         if dataDoc != nil && dataDoc!.documentState == .normal {
-            let notification = Notification(name: .mocReady, object: self, userInfo: ["context" : dataDoc!.managedObjectContext])
-            NotificationCenter.default.post(notification)
+            if let navController = window!.rootViewController as? UINavigationController {
+                if let recipeTableController = navController.childViewControllers.first as? RecipeTableViewController {
+                    recipeTableController.managedObjectContext = dataDoc!.managedObjectContext
+                }
+            }
         } else {
             print ("document at \(dataDoc!.fileURL) is not ready")
         }
     }
-    
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

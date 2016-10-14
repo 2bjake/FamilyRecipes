@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		730791DA1DB10CC90014A294 /* AddRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730791D91DB10CC90014A294 /* AddRecipeView.swift */; };
 		730791DC1DB118900014A294 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730791DB1DB118900014A294 /* AddRecipeViewController.swift */; };
-		7313C1861DA7FDA2005FEBAC /* AddRecipeWebDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C1851DA7FDA2005FEBAC /* AddRecipeWebDetailViewController.swift */; };
-		7313C18C1DAE824B005FEBAC /* AddRecipeCookbookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C18B1DAE824B005FEBAC /* AddRecipeCookbookDetailViewController.swift */; };
+		730791E01DB131470014A294 /* AddRecipeCookbookSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730791DD1DB131470014A294 /* AddRecipeCookbookSourceViewController.swift */; };
+		730791E11DB131470014A294 /* AddRecipeSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730791DE1DB131470014A294 /* AddRecipeSourceViewController.swift */; };
+		730791E21DB131470014A294 /* AddRecipeWebSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730791DF1DB131470014A294 /* AddRecipeWebSourceViewController.swift */; };
 		7313C18F1DAE890F005FEBAC /* Cookbook+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C18D1DAE890F005FEBAC /* Cookbook+CoreDataClass.swift */; };
 		7313C1901DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C18E1DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift */; };
 		7313C1941DAEB486005FEBAC /* AddCookbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C1931DAEB486005FEBAC /* AddCookbookViewController.swift */; };
@@ -21,14 +22,14 @@
 		73E3E0D11DA5C0D600A66A59 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E3E0CF1DA5C0D600A66A59 /* Model.xcdatamodeld */; };
 		73E3E0D41DA5C0E700A66A59 /* Recipe+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3E0D21DA5C0E700A66A59 /* Recipe+CoreDataClass.swift */; };
 		73E3E0D51DA5C0E700A66A59 /* Recipe+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3E0D31DA5C0E700A66A59 /* Recipe+CoreDataProperties.swift */; };
-		73E3E0E11DA6B2F700A66A59 /* AddRecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3E0E01DA6B2F700A66A59 /* AddRecipeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		730791D91DB10CC90014A294 /* AddRecipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeView.swift; sourceTree = "<group>"; };
 		730791DB1DB118900014A294 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
-		7313C1851DA7FDA2005FEBAC /* AddRecipeWebDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeWebDetailViewController.swift; sourceTree = "<group>"; };
-		7313C18B1DAE824B005FEBAC /* AddRecipeCookbookDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeCookbookDetailViewController.swift; sourceTree = "<group>"; };
+		730791DD1DB131470014A294 /* AddRecipeCookbookSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeCookbookSourceViewController.swift; sourceTree = "<group>"; };
+		730791DE1DB131470014A294 /* AddRecipeSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeSourceViewController.swift; sourceTree = "<group>"; };
+		730791DF1DB131470014A294 /* AddRecipeWebSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeWebSourceViewController.swift; sourceTree = "<group>"; };
 		7313C18D1DAE890F005FEBAC /* Cookbook+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cookbook+CoreDataClass.swift"; path = "Model/Cookbook+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7313C18E1DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cookbook+CoreDataProperties.swift"; path = "Model/Cookbook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7313C1931DAEB486005FEBAC /* AddCookbookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCookbookViewController.swift; sourceTree = "<group>"; };
@@ -41,7 +42,6 @@
 		73E3E0D01DA5C0D600A66A59 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		73E3E0D21DA5C0E700A66A59 /* Recipe+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Recipe+CoreDataClass.swift"; path = "Model/Recipe+CoreDataClass.swift"; sourceTree = "<group>"; };
 		73E3E0D31DA5C0E700A66A59 /* Recipe+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Recipe+CoreDataProperties.swift"; path = "Model/Recipe+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		73E3E0E01DA6B2F700A66A59 /* AddRecipeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +108,10 @@
 		73E3E0E41DA6D0B300A66A59 /* AddRecipes */ = {
 			isa = PBXGroup;
 			children = (
+				730791DD1DB131470014A294 /* AddRecipeCookbookSourceViewController.swift */,
+				730791DE1DB131470014A294 /* AddRecipeSourceViewController.swift */,
+				730791DF1DB131470014A294 /* AddRecipeWebSourceViewController.swift */,
 				730791DB1DB118900014A294 /* AddRecipeViewController.swift */,
-				73E3E0E01DA6B2F700A66A59 /* AddRecipeDetailViewController.swift */,
-				7313C1851DA7FDA2005FEBAC /* AddRecipeWebDetailViewController.swift */,
-				7313C18B1DAE824B005FEBAC /* AddRecipeCookbookDetailViewController.swift */,
 				7313C1931DAEB486005FEBAC /* AddCookbookViewController.swift */,
 				730791D91DB10CC90014A294 /* AddRecipeView.swift */,
 			);
@@ -190,12 +190,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				730791DA1DB10CC90014A294 /* AddRecipeView.swift in Sources */,
+				730791E11DB131470014A294 /* AddRecipeSourceViewController.swift in Sources */,
+				730791E21DB131470014A294 /* AddRecipeWebSourceViewController.swift in Sources */,
 				73E3E0D41DA5C0E700A66A59 /* Recipe+CoreDataClass.swift in Sources */,
+				730791E01DB131470014A294 /* AddRecipeCookbookSourceViewController.swift in Sources */,
 				7313C1901DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift in Sources */,
-				7313C18C1DAE824B005FEBAC /* AddRecipeCookbookDetailViewController.swift in Sources */,
-				7313C1861DA7FDA2005FEBAC /* AddRecipeWebDetailViewController.swift in Sources */,
 				73E3E0CA1DA5C02600A66A59 /* RecipeTableViewController.swift in Sources */,
-				73E3E0E11DA6B2F700A66A59 /* AddRecipeDetailViewController.swift in Sources */,
 				73E3E0B01DA5B6F000A66A59 /* AppDelegate.swift in Sources */,
 				7313C1941DAEB486005FEBAC /* AddCookbookViewController.swift in Sources */,
 				73E3E0D51DA5C0E700A66A59 /* Recipe+CoreDataProperties.swift in Sources */,

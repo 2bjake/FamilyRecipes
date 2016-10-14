@@ -1,5 +1,5 @@
 //
-//  AddRecipeCookbookDetailViewController.swift
+//  AddRecipeCookbookSourceViewController.swift
 //  FamilyRecipes
 //
 //  Created by Foster, Jake on 10/12/16.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddRecipeCookbookDetailViewController: AddRecipeDetailViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     let cookbookLabel = UILabel()
     let cookbookTextField = UITextField()
     let cookbookPicker = UIPickerView()

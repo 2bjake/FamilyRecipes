@@ -29,11 +29,11 @@ class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
 
     func setupRecipeSourceViewController() {
         //TODO: the order of these has to match the order of the source values passed to the view (lame). fix this
-        let cookbookVC = AddRecipeCookbookDetailViewController()
+        let cookbookVC = AddRecipeCookbookSourceViewController()
         cookbookVC.managedObjectContext = managedObjectContext
-        let websiteVC = AddRecipeWebDetailViewController()
-        let photoVC = AddRecipeDetailViewController()
-        let textVC = AddRecipeDetailViewController()
+        let websiteVC = AddRecipeWebSourceViewController()
+        let photoVC = AddRecipeSourceViewController()
+        let textVC = AddRecipeSourceViewController()
         recipeSourceController.viewControllers = [cookbookVC, websiteVC, photoVC, textVC]
     }
 
@@ -66,8 +66,8 @@ class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
         selectedRecipeSourceController().updateRecipe(recipe)
     }
     
-    func selectedRecipeSourceController() -> AddRecipeDetailViewController {
-        return recipeSourceController.selectedViewController as! AddRecipeDetailViewController
+    func selectedRecipeSourceController() -> AddRecipeSourceViewController {
+        return recipeSourceController.selectedViewController as! AddRecipeSourceViewController
     }
 
     // MARK: - AddRecipeViewDelegate

@@ -1,5 +1,5 @@
 //
-//  AddRecipeDetailViewController.swift
+//  AddRecipeSourceViewController.swift
 //  FamilyRecipes
 //
 //  Created by Foster, Jake on 10/6/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeDetailViewController: UIViewController, UITextFieldDelegate {
+class AddRecipeSourceViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()

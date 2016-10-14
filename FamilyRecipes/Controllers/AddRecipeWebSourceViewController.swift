@@ -1,5 +1,5 @@
 //
-//  AddRecipeWebDetailViewController.swift
+//  AddRecipeWebSourceViewController.swift
 //  FamilyRecipes
 //
 //  Created by Foster, Jake on 10/7/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeWebDetailViewController: AddRecipeDetailViewController {
+class AddRecipeWebSourceViewController: AddRecipeSourceViewController {
     let urlTextField = UITextField()
     let webView = UIWebView()
 

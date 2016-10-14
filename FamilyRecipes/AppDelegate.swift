@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var dataDoc : UIManagedDocument?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window!.rootViewController = UINavigationController(rootViewController: RecipeTableViewController())
+        window!.rootViewController = WaitViewController()
         window!.makeKeyAndVisible()
         openCoreDataDocument()
         return true
@@ -56,11 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func dataDocReady() {
         if dataDoc != nil && dataDoc!.documentState == .normal {
-            if let navController = window!.rootViewController as? UINavigationController {
-                if let recipeTableController = navController.childViewControllers.first as? RecipeTableViewController {
-                    recipeTableController.managedObjectContext = dataDoc!.managedObjectContext
-                }
-            }
+            let recipeManager = RecipeManager(managedDocument: dataDoc!)
+            window!.rootViewController = UINavigationController(rootViewController: RecipeTableViewController(recipeManager: recipeManager))
         } else {
             print ("document at \(dataDoc!.fileURL) is not ready")
         }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     let cookbookLabel = UILabel()
@@ -17,13 +16,18 @@ class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, UIPi
     let pageNumberLabel = UILabel()
     let pageNumberField = UITextField()
 
-    
-    var managedObjectContext: NSManagedObjectContext! {
-        didSet {
-            fetchCookbooks()
-        }
-    }
     var cookbooks = [Cookbook]()
+
+    let recipeManager: RecipeManager
+
+    init(recipeManager: RecipeManager) {
+        self.recipeManager = recipeManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported as a RecipeManager is required")
+    }
 
     override func viewDidLoad() {
         cookbookLabel.text = "Cookbook Name"
@@ -49,9 +53,7 @@ class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, UIPi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if cookbooks.isEmpty {
-            fetchCookbooks()
-        }
+        fetchCookbooks()
     }
 
     func setupViews() {
@@ -82,32 +84,36 @@ class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, UIPi
     }
     
     func fetchCookbooks(withSelected selectedCookbook: Cookbook? = nil) {
-        let request : NSFetchRequest<Cookbook> = Cookbook.fetchRequest()
-        request.predicate = nil;
-        request.fetchLimit = 50;
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        do {
-            cookbooks = try managedObjectContext.fetch(request)
-            if cookbooks.count == 0 {
-                cookbookPicker.isHidden = true
-            } else {
-                cookbookPicker.isHidden = false
-                cookbookPicker.reloadAllComponents()
-                var index : Int? = nil
-                if let selected = selectedCookbook {
-                    index = cookbooks.index(of: selected);
-                }
-                cookbookPicker.selectRow((index ?? cookbooks.count / 2), inComponent: 0, animated: false)
-                updateCookbookTextField()
+        cookbooks = recipeManager.getCookbooks()
+        if cookbooks.count == 0 {
+            cookbookPicker.isHidden = true
+        } else {
+            cookbookPicker.isHidden = false
+            cookbookPicker.reloadAllComponents()
+            var index : Int? = nil
+            if let selected = selectedCookbook {
+                index = cookbooks.index(of: selected)
             }
-        } catch {
-            fatalError("Failed to fetch cookbooks: \(error)")
+            cookbookPicker.selectRow((index ?? cookbooks.count / 2), inComponent: 0, animated: false)
+            updateCookbookTextField()
         }
     }
 
     func addCookbookTouched() {
-        print("add cookbook touched") //TODO
+        let input = UIAlertController(title: "Create Cookbook", message: "Name", preferredStyle: .alert)
+        input.addTextField(configurationHandler: nil)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        input.addAction(cancelAction)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            if let name = input.textFields?.first?.text {
+                self.createCookbook(name: name)
+            }
+        }
+        input.addAction(okAction)
+
+        present(input, animated: true, completion: nil)
     }
 
     private func updateCookbookTextField() {
@@ -116,8 +122,7 @@ class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, UIPi
     }
     
     private func createCookbook(name: String) {
-        let cookbook = NSEntityDescription.insertNewObject(forEntityName: "Cookbook", into: managedObjectContext!) as! Cookbook
-        cookbook.name = name
+        let cookbook = recipeManager.createCookbook(name: name)
         fetchCookbooks(withSelected: cookbook)
     }
 

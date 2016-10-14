@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import CoreData
 
 class RecipeCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier);
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,17 +31,18 @@ class RecipeCell: UITableViewCell {
 class RecipeTableViewController : CoreDataTableViewController {
 
     let cellReuseIdentifier = "recipeCell"
-    
-    var managedObjectContext : NSManagedObjectContext! {
-        didSet {
-            let request : NSFetchRequest<Recipe> = Recipe.fetchRequest()
-            request.predicate = nil;
-            request.fetchLimit = 50;
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    let recipeManager: RecipeManager
 
-            fetchedResultsController = (NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil) as! NSFetchedResultsController<NSFetchRequestResult>)
-        }
-    } 
+    init(recipeManager: RecipeManager) {
+        self.recipeManager = recipeManager
+
+        super.init(nibName: nil, bundle: nil)
+        fetchedResultsController = recipeManager.getRecipesFetchedRequestController()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported as a RecipeManager is required")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +51,7 @@ class RecipeTableViewController : CoreDataTableViewController {
     }
 
     func addRecipeTouched() {
-        let modalVC = AddRecipeViewController()
-        modalVC.managedObjectContext = managedObjectContext
+        let modalVC = AddRecipeViewController(recipeManager: recipeManager)
         self.present(modalVC, animated: true, completion: nil)
     }
     

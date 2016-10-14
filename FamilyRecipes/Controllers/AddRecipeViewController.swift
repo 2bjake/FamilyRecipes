@@ -7,12 +7,20 @@
 //
 
 import UIKit
-import CoreData
 
 class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
 
     var recipeSourceController = UITabBarController()
-    var managedObjectContext: NSManagedObjectContext! // must be set before presented
+    let recipeManager: RecipeManager
+
+    init(recipeManager: RecipeManager) {
+        self.recipeManager = recipeManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported as RecipeManager is required")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +37,7 @@ class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
 
     func setupRecipeSourceViewController() {
         //TODO: the order of these has to match the order of the source values passed to the view (lame). fix this
-        let cookbookVC = AddRecipeCookbookSourceViewController()
-        cookbookVC.managedObjectContext = managedObjectContext
+        let cookbookVC = AddRecipeCookbookSourceViewController(recipeManager: recipeManager)
         let websiteVC = AddRecipeWebSourceViewController()
         let photoVC = AddRecipeSourceViewController()
         let textVC = AddRecipeSourceViewController()
@@ -60,10 +67,13 @@ class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
     }
     
     private func createRecipe() {
-        let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: managedObjectContext) as! Recipe
         let addRecipeView = view as! AddRecipeView
-        recipe.name = addRecipeView.nameTextField.text
-        selectedRecipeSourceController().updateRecipe(recipe)
+        if let name = addRecipeView.nameTextField.text {
+            let recipe = recipeManager.createRecipe(name: name)
+            selectedRecipeSourceController().updateRecipe(recipe)
+        } else {
+            presentValidationAlert("Recipe name is required")
+        }
     }
     
     func selectedRecipeSourceController() -> AddRecipeSourceViewController {

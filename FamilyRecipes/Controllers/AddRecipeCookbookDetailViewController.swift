@@ -10,15 +10,42 @@ import UIKit
 import CoreData
 
 class AddRecipeCookbookDetailViewController: AddRecipeDetailViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    @IBOutlet weak var pageNumberField: UITextField!
-    @IBOutlet weak var cookbookPicker: UIPickerView!
+    let cookbookLabel = UILabel()
+    let cookbookTextField = UITextField()
+    let cookbookPicker = UIPickerView()
+    let addCookbookButton = UIButton(type: .roundedRect)
+    let pageNumberLabel = UILabel()
+    let pageNumberField = UITextField()
+
     
-    var managedObjectContext: NSManagedObjectContext? {
+    var managedObjectContext: NSManagedObjectContext! {
         didSet {
             fetchCookbooks()
         }
     }
     var cookbooks = [Cookbook]()
+
+    override func viewDidLoad() {
+        cookbookLabel.text = "Cookbook Name"
+
+        cookbookPicker.dataSource = self
+        cookbookPicker.delegate = self
+
+        cookbookTextField.inputView = cookbookPicker
+        cookbookTextField.borderStyle = .roundedRect
+        cookbookTextField.tintColor = UIColor.clear
+
+        addCookbookButton.setTitle("Add Cookbook", for: .normal)
+        addCookbookButton.addTarget(self, action: #selector(addCookbookTouched), for: .touchUpInside)
+
+        pageNumberLabel.text = "Page Number"
+
+        pageNumberField.delegate = self
+        pageNumberField.borderStyle = .roundedRect
+        pageNumberField.keyboardType = .numberPad
+
+        setupViews()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,31 +53,66 @@ class AddRecipeCookbookDetailViewController: AddRecipeDetailViewController, UIPi
             fetchCookbooks()
         }
     }
+
+    func setupViews() {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        view.addSubview(stackView)
+
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+
+        stackView.addArrangedSubview(cookbookLabel)
+        stackView.addArrangedSubview(cookbookTextField)
+        stackView.addArrangedSubview(addCookbookButton)
+        stackView.addArrangedSubview(pageNumberLabel)
+        stackView.addArrangedSubview(pageNumberField)
+
+        // add padding to gobble up the rest of the space at the bottom of the stack view
+        let padding = UIView()
+        padding.setContentHuggingPriority(1, for: .vertical)
+        padding.setContentCompressionResistancePriority(1, for: .vertical)
+        stackView.addArrangedSubview(padding)
+    }
     
     func fetchCookbooks(withSelected selectedCookbook: Cookbook? = nil) {
-        if let moc = managedObjectContext {
-            let request : NSFetchRequest<Cookbook> = Cookbook.fetchRequest()
-            request.predicate = nil;
-            request.fetchLimit = 50;
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-            
-            do {
-                cookbooks = try moc.fetch(request)
-                if cookbooks.count == 0 {
-                    cookbookPicker.isHidden = true
-                } else {
-                    cookbookPicker.isHidden = false
-                    cookbookPicker.reloadAllComponents()
-                    var index : Int? = nil
-                    if let selected = selectedCookbook {
-                        index = cookbooks.index(of: selected);
-                    }
-                    cookbookPicker.selectRow((index ?? cookbooks.count / 2), inComponent: 0, animated: false)
+        let request : NSFetchRequest<Cookbook> = Cookbook.fetchRequest()
+        request.predicate = nil;
+        request.fetchLimit = 50;
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        do {
+            cookbooks = try managedObjectContext.fetch(request)
+            if cookbooks.count == 0 {
+                cookbookPicker.isHidden = true
+            } else {
+                cookbookPicker.isHidden = false
+                cookbookPicker.reloadAllComponents()
+                var index : Int? = nil
+                if let selected = selectedCookbook {
+                    index = cookbooks.index(of: selected);
                 }
-            } catch {
-                fatalError("Failed to fetch cookbooks: \(error)")
+                cookbookPicker.selectRow((index ?? cookbooks.count / 2), inComponent: 0, animated: false)
+                updateCookbookTextField()
             }
+        } catch {
+            fatalError("Failed to fetch cookbooks: \(error)")
         }
+    }
+
+    func addCookbookTouched() {
+        print("add cookbook touched") //TODO
+    }
+
+    private func updateCookbookTextField() {
+        let index = cookbookPicker.selectedRow(inComponent: 0)
+        cookbookTextField.text = cookbooks[index].name
     }
     
     private func createCookbook(name: String) {
@@ -59,15 +121,13 @@ class AddRecipeCookbookDetailViewController: AddRecipeDetailViewController, UIPi
         fetchCookbooks(withSelected: cookbook)
     }
 
-    override func validateForm() -> Bool {
+    override func validateForm() -> (Bool, String?) {
         if cookbooks.isEmpty {
-            presentAlertText("Cookbook name required")
-            return false
+            return (false, "Cookbook name required")
         } else if let pageNum = pageNumberField.text, pageNum.isEmpty {
-            presentAlertText("Page number required")
-            return false
+            return (false, "Page number required")
         }
-        return true
+        return (true, nil)
     }
     
     override func updateRecipe(_ recipe: Recipe) {
@@ -91,11 +151,12 @@ class AddRecipeCookbookDetailViewController: AddRecipeDetailViewController, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         print("cookbook \(cookbooks[row].name) was selected") //TODO: remove me
-        //TODO: do i need track selection? probably not...
+        updateCookbookTextField()
+        view.endEditing(true)
     }
     
     // MARK: Navigation
-    
+    /*
     func addCookbookUnwind(_ sender: UIStoryboardSegue) {
         if sender.identifier == AddCookbookViewController.doneUnwindIdentifier {
             if let modalViewController = sender.source as? AddCookbookViewController {
@@ -106,4 +167,5 @@ class AddRecipeCookbookDetailViewController: AddRecipeDetailViewController, UIPi
             }
         }
     }
+ */
 }

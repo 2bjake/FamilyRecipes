@@ -15,19 +15,12 @@ class AddRecipeDetailViewController: UIViewController, UITextFieldDelegate {
         tabBarController?.tabBar.isHidden = true
     }
     
-    func validateForm() -> Bool {
-        return false
+    func validateForm() -> (isValid: Bool, errorMessage: String?) {
+        return (false, nil) //abstract
     }
     
     func updateRecipe(_ recipe: Recipe) {
-        return
-    }
-    
-    func presentAlertText(_ text: String) {
-        let alert = UIAlertController(title: "Add Recipe", message: text, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
+        // abstract
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

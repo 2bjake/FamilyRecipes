@@ -9,8 +9,8 @@
 import UIKit
 
 class AddRecipeWebDetailViewController: AddRecipeDetailViewController {
-    @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet weak var webView: UIWebView!
+    let urlTextField = UITextField()
+    let webView = UIWebView()
 
     @IBAction func previewClicked(_ sender: UIButton) {
         if let urlString = urlTextField.text {
@@ -21,12 +21,11 @@ class AddRecipeWebDetailViewController: AddRecipeDetailViewController {
         }
     }
     
-    override func validateForm() -> Bool {
+    override func validateForm() -> (Bool, String?) {
         if let urlString = urlTextField.text, URL(string:urlString) != nil {
-            return true
+            return (true, nil)
         } else {
-            presentAlertText("Web address must be valid")
-            return false
+            return (false, "Web address must be valid")
         }
     }
     

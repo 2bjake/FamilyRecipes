@@ -54,7 +54,7 @@ class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
 
     private func validateForm() -> Bool{
         let addRecipeView = view as! AddRecipeView
-        if addRecipeView.nameTextField.text == nil || addRecipeView.nameTextField.text!.characters.count == 0 {
+        if addRecipeView.recipeName.characters.count == 0 {
             presentValidationAlert("Recipe name is required")
             return false
         } else {
@@ -68,8 +68,8 @@ class AddRecipeViewController: UIViewController, AddRecipeViewDelegate {
     
     private func createRecipe() {
         let addRecipeView = view as! AddRecipeView
-        if let name = addRecipeView.nameTextField.text {
-            let recipe = recipeManager.createRecipe(name: name)
+        if addRecipeView.recipeName.characters.count > 0 {
+            let recipe = recipeManager.createRecipe(name: addRecipeView.recipeName)
             selectedRecipeSourceController().updateRecipe(recipe)
         } else {
             presentValidationAlert("Recipe name is required")

@@ -16,11 +16,15 @@ protocol AddRecipeViewDelegate {
 }
 
 class AddRecipeView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-    let nameLabel = UILabel()
-    let nameTextField = UITextField()
-    let sourceLabel = UILabel()
-    let sourceTextField = UITextField()
-    let sourcePicker = UIPickerView()
+    private let nameLabel = UILabel()
+    private let nameTextField = UITextField()
+    private let sourceLabel = UILabel()
+    private let sourceTextField = UITextField()
+    private let sourcePicker = UIPickerView()
+
+    var recipeName: String {
+        return nameTextField.text ?? ""
+    }
 
     var delegate : AddRecipeViewDelegate? {
         didSet {
@@ -63,7 +67,7 @@ class AddRecipeView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         setupViews()
     }
 
-    func setupViews() {
+    private func setupViews() {
         let navBar = createNavBar()
         addSubview(navBar)
         navBar.translatesAutoresizingMaskIntoConstraints = false
@@ -93,7 +97,7 @@ class AddRecipeView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: elementHeight + stackView.spacing * 3)
     }
 
-    func createNavBar() -> UINavigationBar {
+    private func createNavBar() -> UINavigationBar {
         let navBar = UINavigationBar()
         let navItem = UINavigationItem(title: "Add Recipe")
         navItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTouched))

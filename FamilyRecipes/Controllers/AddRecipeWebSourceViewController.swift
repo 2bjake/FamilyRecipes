@@ -9,9 +9,13 @@
 import UIKit
 
 class AddRecipeWebSourceViewController: AddRecipeSourceViewController {
-    let urlTextField = UITextField()
-    let webView = UIWebView()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view = AddRecipeWebSourceView()
+    }
+
+    /*
     @IBAction func previewClicked(_ sender: UIButton) {
         if let urlString = urlTextField.text {
             if let url = URL(string: urlString) {
@@ -20,17 +24,24 @@ class AddRecipeWebSourceViewController: AddRecipeSourceViewController {
             }
         }
     }
+ */
     
-    override func validateForm() -> (Bool, String?) {
-        if let urlString = urlTextField.text, URL(string:urlString) != nil {
+    override func validateForm() -> (isValid: Bool, errorMessage: String?) {
+        let sourceView = view as! AddRecipeWebSourceView
+
+        if URL(string: sourceView.urlString) != nil {
             return (true, nil)
         } else {
             return (false, "Web address must be valid")
         }
     }
     
-    override func updateRecipe(_ recipe: Recipe) {
-        recipe.source = .website
-        recipe.url = urlTextField.text
+    override func createRecipe(name: String) -> Recipe? {
+        guard validateForm().isValid else {
+            return nil
+        }
+
+        let sourceView = view as! AddRecipeWebSourceView
+        return recipeManager.createWebsiteRecipe(name: name, urlString: sourceView.urlString)
     }
 }

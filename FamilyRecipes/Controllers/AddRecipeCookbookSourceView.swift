@@ -79,11 +79,23 @@ class AddRecipeCookbookSourceView: UIView, UIPickerViewDelegate, UIPickerViewDat
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 
-        stackView.addArrangedSubview(cookbookLabel)
-        stackView.addArrangedSubview(cookbookTextField)
+        let cookbookStack = UIStackView()
+        cookbookStack.axis = .horizontal
+        cookbookStack.spacing = 10
+        cookbookStack.addArrangedSubview(cookbookLabel)
+        cookbookStack.addArrangedSubview(cookbookTextField)
+        stackView.addArrangedSubview(cookbookStack)
+        cookbookTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+
         stackView.addArrangedSubview(addCookbookButton)
-        stackView.addArrangedSubview(pageNumberLabel)
-        stackView.addArrangedSubview(pageNumberField)
+
+        let pageNumStack = UIStackView()
+        pageNumStack.axis = .horizontal
+        pageNumStack.spacing = 10
+        pageNumStack.addArrangedSubview(pageNumberLabel)
+        pageNumStack.addArrangedSubview(pageNumberField)
+        pageNumberField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        stackView.addArrangedSubview(pageNumStack)
 
         // add padding to gobble up the rest of the space at the bottom of the stack view
         let padding = UIView()

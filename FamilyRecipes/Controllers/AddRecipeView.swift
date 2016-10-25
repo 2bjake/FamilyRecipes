@@ -87,10 +87,22 @@ class AddRecipeView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         stackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
 
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(nameTextField)
-        stackView.addArrangedSubview(sourceLabel)
-        stackView.addArrangedSubview(sourceTextField)
+        let nameStack = UIStackView()
+        nameStack.axis = .horizontal
+        nameStack.spacing = 10
+        nameStack.addArrangedSubview(nameLabel)
+        nameStack.addArrangedSubview(nameTextField)
+        nameTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        stackView.addArrangedSubview(nameStack)
+
+
+        let sourceStack = UIStackView()
+        sourceStack.axis = .horizontal
+        sourceStack.spacing = 10
+        sourceStack.addArrangedSubview(sourceLabel)
+        sourceStack.addArrangedSubview(sourceTextField)
+        stackView.addArrangedSubview(sourceStack)
+        sourceTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
 
         //TODO: instead of this, put this and the detail view inside another stack frame?
         let elementHeight = nameLabel.frame.height + nameTextField.frame.height + sourceLabel.frame.height + sourceTextField.frame.height

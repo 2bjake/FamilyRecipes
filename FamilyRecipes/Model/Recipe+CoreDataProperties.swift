@@ -2,7 +2,7 @@
 //  Recipe+CoreDataProperties.swift
 //  FamilyRecipes
 //
-//  Created by Foster, Jake on 10/12/16.
+//  Created by Foster, Jake on 10/25/16.
 //  Copyright © 2016 SideBuild. All rights reserved.
 //
 
@@ -16,9 +16,10 @@ extension Recipe {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var pageNumber: String?
     @NSManaged public var sourceString: String?
     @NSManaged public var url: String?
-    @NSManaged public var pageNumber: String?
+    @NSManaged public var text: String?
     @NSManaged public var inBook: Cookbook?
 
 }

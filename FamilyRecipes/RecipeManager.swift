@@ -35,9 +35,31 @@ class RecipeManager {
         return cookbooks ?? []
     }
 
-    func createRecipe(name: String) -> Recipe {
+    private func createRecipe(name: String) -> Recipe {
         let recipe = NSEntityDescription.insertNewObject(forEntityName: "Recipe", into: managedDocument.managedObjectContext) as! Recipe
         recipe.name = name
+        return recipe
+    }
+
+    func createCookbookRecipe(name: String, cookbook: Cookbook, pageNumber: String) -> Recipe {
+        let recipe = createRecipe(name: name)
+        recipe.source = .cookbook
+        recipe.inBook = cookbook
+        recipe.pageNumber = pageNumber
+        return recipe
+    }
+
+    func createWebsiteRecipe(name: String, urlString: String) -> Recipe {
+        let recipe = createRecipe(name: name)
+        recipe.source = .website
+        recipe.url = urlString
+        return recipe
+    }
+
+    func createTextRecipe(name: String, text: String) -> Recipe {
+        let recipe = createRecipe(name: name)
+        recipe.source = .text
+        recipe.text = text
         return recipe
     }
 

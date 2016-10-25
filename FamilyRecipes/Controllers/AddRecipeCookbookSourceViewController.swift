@@ -11,18 +11,8 @@ import UIKit
 class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, AddRecipeCookbookSourceViewDelegate {
     var cookbooks = [Cookbook]()
 
-    let recipeManager: RecipeManager
-
-    init(recipeManager: RecipeManager) {
-        self.recipeManager = recipeManager
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) is not supported as a RecipeManager is required")
-    }
-
     override func viewDidLoad() {
+        super.viewDidLoad()
         let cookbookSourceView = AddRecipeCookbookSourceView()
         cookbookSourceView.delegate = self
         self.view = cookbookSourceView
@@ -45,13 +35,14 @@ class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, AddR
         return (true, nil)
     }
     
-    override func updateRecipe(_ recipe: Recipe) {
-        if validateForm().isValid {
-            let sourceView = view as! AddRecipeCookbookSourceView
-            recipe.source = .cookbook
-            recipe.inBook = sourceView.cookbook!
-            recipe.pageNumber = sourceView.pageNumber
+    override func createRecipe(name: String) -> Recipe? {
+
+        guard validateForm().isValid else {
+            return nil
         }
+
+        let sourceView = view as! AddRecipeCookbookSourceView
+        return recipeManager.createCookbookRecipe(name: name, cookbook: sourceView.cookbook!, pageNumber: sourceView.pageNumber)
     }
 
     // MARK: - AddRecipeCookbookSourceViewDelegate

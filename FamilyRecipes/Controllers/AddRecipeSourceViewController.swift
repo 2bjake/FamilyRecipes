@@ -10,6 +10,17 @@ import UIKit
 
 class AddRecipeSourceViewController: UIViewController, UITextFieldDelegate {
 
+    let recipeManager: RecipeManager
+
+    init(recipeManager: RecipeManager) {
+        self.recipeManager = recipeManager
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) is not supported as a RecipeManager is required")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.isHidden = true
@@ -18,11 +29,11 @@ class AddRecipeSourceViewController: UIViewController, UITextFieldDelegate {
     func validateForm() -> (isValid: Bool, errorMessage: String?) {
         return (false, nil) //abstract
     }
-    
-    func updateRecipe(_ recipe: Recipe) {
-        // abstract
+
+    @discardableResult func createRecipe(name: String) -> Recipe? {
+        return nil //abstract
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

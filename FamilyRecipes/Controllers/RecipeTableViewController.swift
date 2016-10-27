@@ -20,10 +20,15 @@ class RecipeCell: UITableViewCell {
 
     func setContent(forRecipe recipe: Recipe) {
         textLabel?.text = recipe.name
-        if recipe.source == .cookbook {
+        switch recipe.source {
+        case .cookbook:
             detailTextLabel?.text = "\(recipe.inBook?.name ?? "") - page \(recipe.pageNumber ?? "")"
-        } else if recipe.source == .website {
+        case .website:
             detailTextLabel?.text = recipe.url
+        case .text:
+            detailTextLabel?.text = "text"
+        case .photo:
+            detailTextLabel?.text = "photo"
         }
     }
 }

@@ -39,7 +39,7 @@ class AddRecipeWebSourceView: UIView, UITextFieldDelegate {
     private func setupViews() {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = ViewConstants.StackSpacing
         stackView.distribution = .fill
         stackView.alignment = .fill
         addSubview(stackView)
@@ -52,11 +52,11 @@ class AddRecipeWebSourceView: UIView, UITextFieldDelegate {
 
         let urlStack = UIStackView()
         urlStack.axis = .horizontal
-        urlStack.spacing = 10
+        urlStack.spacing = ViewConstants.StackSpacing
         urlStack.addArrangedSubview(urlLabel)
         urlStack.addArrangedSubview(urlTextField)
         stackView.addArrangedSubview(urlStack)
-        urlTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        urlTextField.widthAnchor.constraint(equalToConstant: ViewConstants.FieldWidth).isActive = true
 
         // add padding to gobble up the rest of the space at the bottom of the stack view
         let padding = UIView()

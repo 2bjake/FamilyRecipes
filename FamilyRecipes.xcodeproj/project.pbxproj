@@ -20,6 +20,8 @@
 		730C010E1DB6A4C000B484A5 /* AddRecipeTextSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C010D1DB6A4C000B484A5 /* AddRecipeTextSourceViewController.swift */; };
 		7313C18F1DAE890F005FEBAC /* Cookbook+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C18D1DAE890F005FEBAC /* Cookbook+CoreDataClass.swift */; };
 		7313C1901DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7313C18E1DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift */; };
+		73585D0D1DC23699009E896C /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73585D0C1DC23699009E896C /* ViewConstants.swift */; };
+		73585D0F1DC23A4B009E896C /* todo.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73585D0E1DC23A4B009E896C /* todo.txt */; };
 		73E3E0B01DA5B6F000A66A59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3E0AF1DA5B6F000A66A59 /* AppDelegate.swift */; };
 		73E3E0B71DA5B6F000A66A59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E3E0B61DA5B6F000A66A59 /* Assets.xcassets */; };
 		73E3E0C81DA5B90B00A66A59 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E3E0C71DA5B90B00A66A59 /* CoreDataTableViewController.swift */; };
@@ -43,6 +45,8 @@
 		730C010D1DB6A4C000B484A5 /* AddRecipeTextSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRecipeTextSourceViewController.swift; path = Controllers/AddRecipeTextSourceViewController.swift; sourceTree = "<group>"; };
 		7313C18D1DAE890F005FEBAC /* Cookbook+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cookbook+CoreDataClass.swift"; path = "Model/Cookbook+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7313C18E1DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cookbook+CoreDataProperties.swift"; path = "Model/Cookbook+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		73585D0C1DC23699009E896C /* ViewConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
+		73585D0E1DC23A4B009E896C /* todo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo.txt; sourceTree = "<group>"; };
 		73E3E0AC1DA5B6F000A66A59 /* FamilyRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamilyRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E3E0AF1DA5B6F000A66A59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E3E0B61DA5B6F000A66A59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 				730791E31DB136310014A294 /* AddRecipeCookbookSourceView.swift */,
 				730791D91DB10CC90014A294 /* AddRecipeView.swift */,
 				730C01061DB5560C00B484A5 /* AddRecipeWebSourceView.swift */,
+				73585D0C1DC23699009E896C /* ViewConstants.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 				73E3E0AF1DA5B6F000A66A59 /* AppDelegate.swift */,
 				73E3E0B61DA5B6F000A66A59 /* Assets.xcassets */,
 				73E3E0BB1DA5B6F000A66A59 /* Info.plist */,
+				73585D0E1DC23A4B009E896C /* todo.txt */,
 			);
 			path = FamilyRecipes;
 			sourceTree = "<group>";
@@ -217,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73585D0F1DC23A4B009E896C /* todo.txt in Resources */,
 				73E3E0B71DA5B6F000A66A59 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +245,7 @@
 				7313C1901DAE890F005FEBAC /* Cookbook+CoreDataProperties.swift in Sources */,
 				730791E81DB15EC50014A294 /* WaitViewController.swift in Sources */,
 				730C01071DB5560C00B484A5 /* AddRecipeWebSourceView.swift in Sources */,
+				73585D0D1DC23699009E896C /* ViewConstants.swift in Sources */,
 				73E3E0CA1DA5C02600A66A59 /* RecipeTableViewController.swift in Sources */,
 				73E3E0B01DA5B6F000A66A59 /* AppDelegate.swift in Sources */,
 				73E3E0D51DA5C0E700A66A59 /* Recipe+CoreDataProperties.swift in Sources */,

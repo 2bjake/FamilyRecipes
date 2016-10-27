@@ -18,7 +18,6 @@ class AddRecipeCookbookSourceView: UIView, UIPickerViewDelegate, UIPickerViewDat
     private let cookbookLabel = UILabel()
     private let cookbookTextField = UITextField()
     private let cookbookPicker = UIPickerView()
-    private let addCookbookButton = UIButton(type: .roundedRect)
     private let pageNumberLabel = UILabel()
     private let pageNumberField = UITextField()
 
@@ -49,12 +48,20 @@ class AddRecipeCookbookSourceView: UIView, UIPickerViewDelegate, UIPickerViewDat
         cookbookPicker.dataSource = self
         cookbookPicker.delegate = self
 
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.sizeToFit()
+        let addButton = UIBarButtonItem()
+        addButton.target = self
+        addButton.action = #selector(AddRecipeCookbookSourceView.addCookbookTouched)
+        addButton.title = "Add new cookbook"
+        toolBar.setItems([addButton], animated: false)
+
         cookbookTextField.inputView = cookbookPicker
+        cookbookTextField.inputAccessoryView = toolBar
         cookbookTextField.borderStyle = .roundedRect
         cookbookTextField.tintColor = UIColor.clear
-
-        addCookbookButton.setTitle("Add Cookbook", for: .normal)
-        addCookbookButton.addTarget(self, action: #selector(AddRecipeCookbookSourceView.addCookbookTouched), for: .touchUpInside)
 
         pageNumberLabel.text = "Page Number"
 
@@ -68,7 +75,7 @@ class AddRecipeCookbookSourceView: UIView, UIPickerViewDelegate, UIPickerViewDat
     private func setupViews() {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = ViewConstants.StackSpacing
         stackView.distribution = .fill
         stackView.alignment = .fill
         addSubview(stackView)
@@ -81,20 +88,18 @@ class AddRecipeCookbookSourceView: UIView, UIPickerViewDelegate, UIPickerViewDat
 
         let cookbookStack = UIStackView()
         cookbookStack.axis = .horizontal
-        cookbookStack.spacing = 10
+        cookbookStack.spacing = ViewConstants.StackSpacing
         cookbookStack.addArrangedSubview(cookbookLabel)
         cookbookStack.addArrangedSubview(cookbookTextField)
         stackView.addArrangedSubview(cookbookStack)
-        cookbookTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
-
-        stackView.addArrangedSubview(addCookbookButton)
+        cookbookTextField.widthAnchor.constraint(equalToConstant: ViewConstants.FieldWidth).isActive = true
 
         let pageNumStack = UIStackView()
         pageNumStack.axis = .horizontal
-        pageNumStack.spacing = 10
+        pageNumStack.spacing = ViewConstants.StackSpacing
         pageNumStack.addArrangedSubview(pageNumberLabel)
         pageNumStack.addArrangedSubview(pageNumberField)
-        pageNumberField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        pageNumberField.widthAnchor.constraint(equalToConstant: ViewConstants.FieldWidth).isActive = true
         stackView.addArrangedSubview(pageNumStack)
 
         // add padding to gobble up the rest of the space at the bottom of the stack view
@@ -105,6 +110,7 @@ class AddRecipeCookbookSourceView: UIView, UIPickerViewDelegate, UIPickerViewDat
     }
 
     @objc private func addCookbookTouched() {
+        endEditing(true)
         delegate?.addCookbookTouched { cookbook in
             self.cookbooksUpdated()
             let index = self.delegate?.cookbookValues().index(of: cookbook)

@@ -78,31 +78,31 @@ class AddRecipeView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
 
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = ViewConstants.StackSpacing
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
         addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: navBar.bottomAnchor, constant: 8).isActive = true
         stackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
 
         let nameStack = UIStackView()
         nameStack.axis = .horizontal
-        nameStack.spacing = 10
+        nameStack.spacing = ViewConstants.StackSpacing
         nameStack.addArrangedSubview(nameLabel)
         nameStack.addArrangedSubview(nameTextField)
-        nameTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        nameTextField.widthAnchor.constraint(equalToConstant: ViewConstants.FieldWidth).isActive = true
         stackView.addArrangedSubview(nameStack)
 
 
         let sourceStack = UIStackView()
         sourceStack.axis = .horizontal
-        sourceStack.spacing = 10
+        sourceStack.spacing = ViewConstants.StackSpacing
         sourceStack.addArrangedSubview(sourceLabel)
         sourceStack.addArrangedSubview(sourceTextField)
         stackView.addArrangedSubview(sourceStack)
-        sourceTextField.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        sourceTextField.widthAnchor.constraint(equalToConstant: ViewConstants.FieldWidth).isActive = true
 
         //TODO: instead of this, put this and the detail view inside another stack frame?
         let elementHeight = nameLabel.frame.height + nameTextField.frame.height + sourceLabel.frame.height + sourceTextField.frame.height
@@ -158,7 +158,6 @@ class AddRecipeView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("source \(delegate?.recipeSourceValues()[row]) was selected") //TODO: remove me
         recipeSourceIndex = row
         endEditing(true)
     }

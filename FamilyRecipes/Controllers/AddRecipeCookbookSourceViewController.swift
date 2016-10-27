@@ -48,7 +48,7 @@ class AddRecipeCookbookSourceViewController: AddRecipeSourceViewController, AddR
     // MARK: - AddRecipeCookbookSourceViewDelegate
 
     func addCookbookTouched(addCompletion: @escaping (Cookbook) -> Void) {
-        let input = UIAlertController(title: "Create Cookbook", message: "Name", preferredStyle: .alert)
+        let input = UIAlertController(title: "Add Cookbook", message: "Name", preferredStyle: .alert)
         input.addTextField(configurationHandler: nil)
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)

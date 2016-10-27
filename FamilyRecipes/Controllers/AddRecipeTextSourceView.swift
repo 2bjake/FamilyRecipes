@@ -34,7 +34,7 @@ class AddRecipeTextSourceView: UIView {
     private func setupView() {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = ViewConstants.StackSpacing
         stackView.distribution = .fill
         stackView.alignment = .fill
         addSubview(stackView)
